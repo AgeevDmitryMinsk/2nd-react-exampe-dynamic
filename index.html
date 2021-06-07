@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/jsx">
+    // Переменная, отвечающая за состояние приложения
+    let isClicked = false;
+
+    // Функция, отвечающая за отрисовку интерфейса
+    // с учётом текущего состояния isClicked
+    function renderAll() {
+        ReactDOM.render((
+            <div>
+                <div id="myElement">Click me!</div>
+
+                <div id="myAnotherElement" className={isClicked ? 'active' : ''}>
+                    <div id="myText">
+                        {isClicked ? 'It was clicked!' : 'Waiting for click...'}
+                    </div>
+                </div>
+            </div>
+        ), document.querySelector('#root'));
+    }
+
+    // Вызов первичной отрисовки при открытии страницы
+    renderAll();
+
+    // При наступлении события мы изменяем переменную состояния
+    // и заново вызываем отрисовку
+    const element = document.querySelector('#myElement');
+    element.addEventListener('click', () => {
+        isClicked = true;
+        renderAll();
+    });
+</script>
+
+</body>
+</html>
